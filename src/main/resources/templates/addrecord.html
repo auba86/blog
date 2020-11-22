@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Record</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div>
+<h1>Create New Record</h1>
+<form action="#" th:action="@{/saveNewRecord}" th:object="${record}"
+      method="POST">
+    <input type="text" th:field="*{recordTitle}"
+           placeholder="Record Title">
+
+    <textarea rows="5" cols="50" type="text" th:field="*{recordDescription}"
+              placeholder="Record"></textarea>
+
+<!--    <input type="hidden" th:field="*{recordDate}" th:value="${recordDate}">-->
+
+<!--    <input type="hidden"  th:field="*{userId}" th:value="${userId}" />-->
+
+    <button type="submit"> Save </button>
+</form>
+</div>
+</body>
+</html>
