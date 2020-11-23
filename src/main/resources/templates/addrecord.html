@@ -14,8 +14,8 @@
 </head>
 <body>
 <h1>Create New Record</h1>
-<a th:href="@{/}"><button id="backbutton"> Back </button></a>
-    <section class="row" id="centeredElement" style="width: 60%; margin-left:20%; margin-top: 5%; border: 10px">
+<a th:href="@{/}"><button id="backbutton" class="btn btn-sm btn-info"> Back </button></a>
+    <section class="row" style="width: 60%; margin-left:20%; margin-top: 5%; border: 10px">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">
 <form action="#" th:action="@{/saveNewRecord}" th:object="${record}"
@@ -33,7 +33,7 @@
                   type="text" th:field="*{recordDescription}" placeholder="Record"></textarea>
     </div>
 
-    <button type="submit"> Save </button>
+    <button type="submit" class="btn btn-sm btn-primary"> Save </button>
 </form>
         </div>
         <div class="col-xs-2"></div>

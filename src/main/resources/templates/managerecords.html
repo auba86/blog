@@ -7,8 +7,13 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -16,39 +21,74 @@
 </head>
 <body>
 <h1>Manage All Records</h1>
-<br>
-<div>
+<a th:href="@{/}"><button id="backbutton" class="btn btn-sm btn-info"> Back </button></a>
+<!--<div>-->
 <!--<form class="form-inline col-md-4">-->
-<form class="form-horizontal my-3 col-xs-3">
+<!--<form class="form-horizontal my-3 col-xs-3">-->
 <!--    <img src="/search2.svg" width="20" height="20" alt=""> my-3 col-md-10-->
-    <i class="glyphicon glyphicon-search"></i>
-    <input class="form-control" id="myInput" type="text"
-           placeholder="Search...">
-</form>
-</div>
+
+<!--</form>-->
+<!--</div>-->
 <!--<p><span><i class="glyphicon glyphicon-search"></i></span><input class="form-control input-sm" id="myInput" type="text" placeholder="Search.."></p>-->
-<br>
+
+<section class="row">
+
+    <div class="col-xs-2"></div>
+
+    <div class="col-xs-8">
+        <form class="form-inline">
+            <img src="/search.png" width="20" height="20" alt="">
+            <input class="form-control" id="myInput" style="width: 90%" type="text" placeholder="Start type to search record...">
+        </form>
 <div class="container-fluid">
-    <table id="myTable" class="table-bordered">
+    <table id="myTable" class="table-bordered" style="width: 90%; margin-left:5%; margin-top: 1%;">
        <thead>
        <tr class="center">
-           <th>Record Title</th>
-           <th>Record Description</th>
+           <th>Title</th>
+           <th>Description</th>
            <th>Actions</th>
        </tr>
        </thead>
         <tbody>
         <tr th:each="record:${recordsList}">
-        <td th:text="${record.recordTitle}"></td>
-        <td th:text="${record.recordDescription}"></td>
-        <td>
-            <a th:href="@{/recordUpdateForm/{recordId}(recordId=${record.recordId})}" class="btn btn-sm btn-info">Edit</a>
-            <a th:href="@{/deleteRecord/{recordId}(recordId=${record.recordId})}" class="btn btn-sm btn-danger">Delete</a>
+        <td style="width: 20%" th:text="${record.recordTitle}"></td>
+        <td style="width: 70%" th:text="${record.recordDescription}"></td>
+        <td style="width: 10%">
+            <a th:href="@{/recordUpdateForm/{recordId}(recordId=${record.recordId})}" class="btn btn-sm btn-block btn-info">Edit</a>
+            <a th:href="@{/deleteRecord/{recordId}(recordId=${record.recordId})}" class="btn btn-sm btn-block btn-danger"
+               data-toggle="modal" data-target="#exampleModalCenter">Delete</a>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img src="/danger.png" width="30" height="30" alt="">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Delete alert</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Press "Delete" to complete the action!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Close</button>
+                            <a th:href="@{/deleteRecord/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </td>
         </tr>
         </tbody>
     </table>
 </div>
+    </div>
+
+    <div class="col-xs-2"></div>
+
+</section>
+
 <script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
@@ -59,8 +99,5 @@ $(document).ready(function(){
   });
 });
 </script>
-<hr>
-
-<a th:href="@{/}"><button> Back </button></a>
 </body>
 </html>

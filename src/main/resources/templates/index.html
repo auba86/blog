@@ -2,65 +2,74 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
     <title>Main Page</title>
-    <!--    <link rel="stylesheet" type="text/css" href="style.css">-->
-    <!--    <link href="../style.css" th:href="@{/style.css}" rel="stylesheet" />-->
 
-    <!--    <link rel="stylesheet" type="text/css" media="all"-->
-    <!--          href="style.css" th:href="@{/style.css}" />-->
-
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" media="all"
           href="style.css" th:href="@{/style.css}"/>
 
 </head>
 <body>
+<nav>
+    <h1>Welcome</h1>
+</nav>
 <div class="container">
     <section class="row">
-        <h1>WELCOME</h1>
-        <nav class="col-xs-12 center">
-            <a th:href="@{/createNewUser}">
-                <button> Create User</button>
-            </a>
-            <a th:href="@{/newRecordForm}">
-                <button> Add Record</button>
-            </a>
-            <a th:href="@{/manageRecords}">
-                <button> Manage Record</button>
-            </a>
-            <a th:href="@{/testPage}">
-                <button> Test</button>
-            </a>
+<!--        <h1>WELCOME</h1>-->
+<!--        <nav class="col-xs-12 center">-->
+<!--            <a th:href="@{/createNewUser}">-->
+<!--                <button> Create User</button>-->
+<!--            </a>-->
+<!--            <a th:href="@{/newRecordForm}">-->
+<!--                <button> Add Record</button>-->
+<!--            </a>-->
+<!--            <a th:href="@{/manageRecords}">-->
+<!--                <button> Manage Record</button>-->
+<!--            </a>-->
+<!--            <a th:href="@{/testPage}">-->
+<!--                <button> Test</button>-->
+<!--            </a>-->
+<!--        </nav>-->
+
+        <nav role="navigation">
+            <div id="menuToggle">
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a th:href="@{/createNewUser}"><li>Create User</li></a>
+                    <a th:href="@{/newRecordForm}"><li>Add Record</li></a>
+                    <a th:href="@{/manageRecords}"><li>Manage Records</li></a>
+                    <a href="#"><li>About project</li></a>
+                </ul>
+            </div>
         </nav>
 
 
         <section class="row"  th:each="record:${recordsList}">
-            <div class="col-xs-2"></div>
-            <div class="col-xs-8"  >
+            <div class="col-xs-2">
 
-                <table id="centeredElement" style="width: 60%; margin-left:20%; margin-top: 10%; border: 10px">
+
+
+
+            </div>
+            <div class="col-xs-8">
+
+                <table style="width: 60%; margin-left:20%; margin-top: 10%; margin-bottom: 10%; border: 10px">
                     <tbody>
                     <tr id="postDate">
-                        <td aria-colspan="2">Posted:</td>
+<!--                        <td aria-colspan="2">Posted:</td>-->
                         <td th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></td>
                     </tr>
                     <tr id="postTitle">
-                        <td></td>
                         <td th:text="${record.recordTitle}"></td>
                     </tr>
                     <tr id="postDescription">
-                        <td></td>
                         <td th:text="${record.recordDescription}"></td>
                     </tr>
                     </tbody>
