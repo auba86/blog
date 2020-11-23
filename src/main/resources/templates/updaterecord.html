@@ -8,6 +8,7 @@
 <body>
 <div class="container">
     <h1>Update Record</h1>
+    <a th:href="@{/}"><button id="backbutton"> Back </button></a>
 
     <form action="#" th:action="@{/updateOldRecord}" th:object="${record}"
           method="POST">
@@ -25,8 +26,6 @@
         <button type="submit"> Update Record </button>
     </form>
 </div>
-<hr>
 
-<a th:href="@{/}"><button> Back </button></a>
 </body>
 </html>

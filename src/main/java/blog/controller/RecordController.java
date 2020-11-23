@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.time.*;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -49,6 +47,8 @@ public class RecordController {
     @GetMapping("/")
     public String viewAllRecords(Model model) {
         List<Record> recordsList = recordService.getAllRecords();
+        //Collections.sort(recordsList, (left, right) -> (int) (left.getRecordId() - right.getRecordId()));
+        Collections.sort(recordsList, new CustomComparator());
         model.addAttribute("recordsList", recordsList);
         return "index";
     }
@@ -77,6 +77,14 @@ public class RecordController {
     public String updateOldRecord(@ModelAttribute("record") Record postRecord){
         recordService.updateRecord(postRecord);
         return "redirect:/";
+    }
+
+    public class CustomComparator implements Comparator<Record>
+    {
+        @Override
+        public int compare(Record o1, Record o2) {
+            return o2.getRecordId().compareTo(o1.getRecordId());
+        }
     }
 
 }

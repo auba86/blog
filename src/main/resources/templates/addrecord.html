@@ -13,8 +13,11 @@
           href="style.css" th:href="@{/style.css}" />
 </head>
 <body>
-<div>
 <h1>Create New Record</h1>
+<a th:href="@{/}"><button id="backbutton"> Back </button></a>
+    <section class="row" id="centeredElement" style="width: 60%; margin-left:20%; margin-top: 5%; border: 10px">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
 <form action="#" th:action="@{/saveNewRecord}" th:object="${record}"
       method="POST">
     <div>
@@ -23,18 +26,18 @@
     </div>
     <br>
     <div class="box">
-        <label for="counter-input" class="label">Character count: <span id="counter-display" class="tag is-success">0</span></label>
+        <label for="counter-input" class="label">Characters (MAX 300):
+            <span id="counter-display" class="tag is-success">0</span></label>
     <br>
-        <textarea name="textarea" id="counter-input" rows="5" cols="50" type="text" th:field="*{recordDescription}"
-              placeholder="Record"></textarea>
+        <textarea name="textarea" id="counter-input" rows="5" cols="50" maxlength="300"
+                  type="text" th:field="*{recordDescription}" placeholder="Record"></textarea>
     </div>
 
     <button type="submit"> Save </button>
 </form>
-</div>
-<hr>
-
-<a th:href="@{/}"><button> Back </button></a>
+        </div>
+        <div class="col-xs-2"></div>
+    </section>
 
 <script>
     (() => {
