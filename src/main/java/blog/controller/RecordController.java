@@ -29,6 +29,11 @@ public class RecordController {
         return "addrecord";
     }
 
+    @GetMapping("/testPage")
+    public String testPage() {
+        return "test";
+    }
+
     @PostMapping("/saveNewRecord")
     public String saveNewRecord(@ModelAttribute(value="record") Record record){
         User user = new User();
@@ -48,6 +53,30 @@ public class RecordController {
         return "index";
     }
 
-//    @GetMapping("/manageRecords")
-//    public String manageRecords
+    @GetMapping("/manageRecords")
+    public String manageRecords(Model model){
+        List<Record> recordsList = recordService.getAllRecords();
+        model.addAttribute("recordsList", recordsList);
+        return "managerecords";
+    }
+
+    @GetMapping("/deleteRecord/{recordId}")
+    public String deleteRecord(@PathVariable(value = "recordId") long recordId) {
+        this.recordService.deleteRecordById(recordId);
+        return "redirect:/";
+    }
+
+    @GetMapping("/recordUpdateForm/{recordId}")
+    public String recordUpdateForm(@PathVariable(value = "recordId") long recordId, Model model){
+        Record record = recordService.getRecordById(recordId);
+        model.addAttribute("record", record);
+        return "updaterecord";
+    }
+
+    @PostMapping("/updateOldRecord")
+    public String updateOldRecord(@ModelAttribute("record") Record postRecord){
+        recordService.updateRecord(postRecord);
+        return "redirect:/";
+    }
+
 }

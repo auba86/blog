@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Records</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>Manage All Records</h1>
+<br>
+<div>
+<!--<form class="form-inline col-md-4">-->
+<form class="form-horizontal my-3 col-xs-3">
+<!--    <img src="/search2.svg" width="20" height="20" alt=""> my-3 col-md-10-->
+    <i class="glyphicon glyphicon-search"></i>
+    <input class="form-control" id="myInput" type="text"
+           placeholder="Search...">
+</form>
+</div>
+<!--<p><span><i class="glyphicon glyphicon-search"></i></span><input class="form-control input-sm" id="myInput" type="text" placeholder="Search.."></p>-->
+<br>
+<div class="container-fluid">
+    <table id="myTable" class="table-bordered">
+       <thead>
+       <tr class="center">
+           <th>Record Title</th>
+           <th>Record Description</th>
+           <th>Actions</th>
+       </tr>
+       </thead>
+        <tbody>
+        <tr th:each="record:${recordsList}">
+        <td th:text="${record.recordTitle}"></td>
+        <td th:text="${record.recordDescription}"></td>
+        <td>
+            <a th:href="@{/recordUpdateForm/{recordId}(recordId=${record.recordId})}" class="btn btn-sm btn-info">Edit</a>
+            <a th:href="@{/deleteRecord/{recordId}(recordId=${record.recordId})}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<hr>
+
+<a th:href="@{/}"><button> Back </button></a>
+</body>
+</html>

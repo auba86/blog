@@ -11,18 +11,22 @@
 
     <form action="#" th:action="@{/saveUserData}" th:object="${user}"
           method="POST">
+        <div>
         <input type="text" th:field="*{username}"
                placeholder="Your Username">
-
+        </div>
+        <br>
+        <div>
         <input type="password" th:field="*{password}"
                placeholder="Your Password">
-
+        </div>
         <button type="submit"> Save </button>
     </form>
 
-    <hr>
 
-    <a th:href="@{/}"><button> Back to main page </button></a>
 </div>
+<hr>
+
+<a th:href="@{/}"><button> Back </button></a>
 </body>
 </html>

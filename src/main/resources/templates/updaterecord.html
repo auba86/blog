@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Record</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Update Record</h1>
+
+    <form action="#" th:action="@{/updateOldRecord}" th:object="${record}"
+          method="POST">
+
+        <input type="hidden" th:field="*{recordId}"/>
+
+        <input type="text" th:field="*{recordTitle}">
+
+        <input type="text" th:field="*{recordDescription}">
+
+<!--        <input type="hidden" th:field="*{recordDate}" />-->
+
+<!--        <input type="hidden" th:field="*{userId}" />-->
+
+        <button type="submit"> Update Record </button>
+    </form>
+</div>
+<hr>
+
+<a th:href="@{/}"><button> Back </button></a>
+</body>
+</html>

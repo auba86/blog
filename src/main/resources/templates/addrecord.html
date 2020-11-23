@@ -3,25 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Record</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="style.css" th:href="@{/style.css}" />
 </head>
 <body>
 <div>
 <h1>Create New Record</h1>
 <form action="#" th:action="@{/saveNewRecord}" th:object="${record}"
       method="POST">
+    <div>
     <input type="text" th:field="*{recordTitle}"
            placeholder="Record Title">
-
-    <textarea rows="5" cols="50" type="text" th:field="*{recordDescription}"
+    </div>
+    <br>
+    <div class="box">
+        <label for="counter-input" class="label">Character count: <span id="counter-display" class="tag is-success">0</span></label>
+    <br>
+        <textarea name="textarea" id="counter-input" rows="5" cols="50" type="text" th:field="*{recordDescription}"
               placeholder="Record"></textarea>
-
-<!--    <input type="hidden" th:field="*{recordDate}" th:value="${recordDate}">-->
-
-<!--    <input type="hidden"  th:field="*{userId}" th:value="${userId}" />-->
+    </div>
 
     <button type="submit"> Save </button>
 </form>
 </div>
+<hr>
+
+<a th:href="@{/}"><button> Back </button></a>
+
+<script>
+    (() => {
+  const counter = (() => {
+    const input = document.getElementById('counter-input'),
+      display = document.getElementById('counter-display'),
+      changeEvent = (evt) => display.innerHTML = evt.target.value.length,
+      getInput = () => input.value,
+      countEvent = () => input.addEventListener('keyup', changeEvent),
+      init = () => countEvent();
+
+    return {
+      init: init
+    }
+
+  })();
+
+  counter.init();
+
+})();
+</script>
+
 </body>
 </html>

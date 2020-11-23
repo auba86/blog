@@ -2,44 +2,73 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
     <title>Main Page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <!--    <link rel="stylesheet" type="text/css" href="style.css">-->
+    <!--    <link href="../style.css" th:href="@{/style.css}" rel="stylesheet" />-->
+
+    <!--    <link rel="stylesheet" type="text/css" media="all"-->
+    <!--          href="style.css" th:href="@{/style.css}" />-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" media="all"
+              href="style.css" th:href="@{/style.css}" />
+
 </head>
 <body>
-<h1>WELCOME</h1>
-<div>
-<a th:href="@{/createNewUser}"><button> Create User </button></a>
-<a th:href="@{/newRecordForm}"><button> Add Record </button></a>
-<a th:href="@{/manageRecords}"><button> Manage Record </button></a>
-</div>
-<div class="center">
-    <table th:each="record:${recordsList}">
-        <tbody>
-            Posted: <tr th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></tr>
-            <br>
-            <tr th:text="${record.recordTitle}"></tr>
-            <br>
-            <tr th:text="${record.recordDescription}"></tr>
-            <br>
-        <hr>
-        </tbody>
-    </table>
-<!--</div><div>-->
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <td>Title</td>-->
-<!--        <td>Description</td>-->
-<!--        <td>Date</td>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="record:${recordsList}">-->
-<!--            <td th:text="${record.recordTitle}"></td>-->
-<!--            <td th:text="${record.recordDescription}"></td>-->
-<!--            <td th:text="${record.recordDate}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
+<div class="container">
+    <section class="row">
+        <h1>WELCOME</h1>
+        <nav class="col-xs-12 center">
+            <a th:href="@{/createNewUser}">
+                <button> Create User</button>
+            </a>
+            <a th:href="@{/newRecordForm}">
+                <button> Add Record</button>
+            </a>
+            <a th:href="@{/manageRecords}">
+                <button> Manage Record</button>
+            </a>
+            <a th:href="@{/testPage}">
+                <button> Test </button>
+            </a>
+        </nav>
+        <section class="row">
+            <div class="col-xs-2 "> <img src="web2.png"  width="100" height="100"></div>
+            <div class="col-xs-8">
+
+                <table border="1">
+                    <tbody th:each="record:${recordsList}">
+
+                    <tr>
+
+                        <td th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${record.recordTitle}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${record.recordDescription}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-2"> <img src="web.png"  width="100" height="100"> </div>
+        </section>
+        <nav class="col-xs-12">
+
+        </nav>
+    </section>
 </div>
 </body>
 </html>
