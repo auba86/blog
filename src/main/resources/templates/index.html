@@ -10,76 +10,156 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" media="all"
-          href="style.css" th:href="@{/style.css}"/>
+          href="css/style.css" th:href="@{/css/style.css}"/>
 
 </head>
 <body>
 <nav>
-    <h1>Welcome</h1>
+    <h1>Audriaus blog'as</h1>
+    <div class="drawline"></div>
 </nav>
 <div class="container">
     <section class="row">
-<!--        <h1>WELCOME</h1>-->
-<!--        <nav class="col-xs-12 center">-->
-<!--            <a th:href="@{/createNewUser}">-->
-<!--                <button> Create User</button>-->
-<!--            </a>-->
-<!--            <a th:href="@{/newRecordForm}">-->
-<!--                <button> Add Record</button>-->
-<!--            </a>-->
-<!--            <a th:href="@{/manageRecords}">-->
-<!--                <button> Manage Record</button>-->
-<!--            </a>-->
-<!--            <a th:href="@{/testPage}">-->
-<!--                <button> Test</button>-->
-<!--            </a>-->
-<!--        </nav>-->
-
         <nav role="navigation">
             <div id="menuToggle">
-                <input type="checkbox" />
+                <input type="checkbox"/>
                 <span></span>
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a th:href="@{/createNewUser}"><li>Create User</li></a>
-                    <a th:href="@{/newRecordForm}"><li>Add Record</li></a>
-                    <a th:href="@{/manageRecords}"><li>Manage Records</li></a>
-                    <a href="#"><li>About project</li></a>
+                    <a th:href="@{/createNewUser}">
+                        <li>Create User</li>
+                    </a>
+                    <a th:href="@{/newRecordForm}">
+                        <li>Add Record</li>
+                    </a>
+                    <a th:href="@{/manageRecords}">
+                        <li>Manage Records</li>
+                    </a>
+                    <a th:href="@{/testPage}">
+                        <li>About project</li>
+                    </a>
                 </ul>
             </div>
         </nav>
 
+        <section class="row">
+            <div class="col-xs-2"></div>
 
-        <section class="row"  th:each="record:${recordsList}">
-            <div class="col-xs-2">
-
-
-
-
-            </div>
             <div class="col-xs-8">
 
-                <table style="width: 60%; margin-left:20%; margin-top: 10%; margin-bottom: 10%; border: 10px">
-                    <tbody>
-                    <tr id="postDate">
-<!--                        <td aria-colspan="2">Posted:</td>-->
-                        <td th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></td>
-                    </tr>
-                    <tr id="postTitle">
-                        <td th:text="${record.recordTitle}"></td>
-                    </tr>
-                    <tr id="postDescription">
-                        <td th:text="${record.recordDescription}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-2"></div>
-        </section>
-        <!--        <nav class="col-xs-12">-->
+                <div th:each="record, iterStat: ${recordsList}" th:if="${iterStat.index} == 0">
+                    <img src="pics/naglas.png"  width="80" height="80" alt="">
+                    <p id="postDate">Posted: <span th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span></p>
+                    <p id="postTitle"><span th:text="${record.recordTitle}"></span></p>
+                    <p id="postDescription"><span th:text="${record.recordDescription}"></span></p>
+                    <a class="btn btn-sm btn-info"
+                       data-toggle="modal" data-target="#exampleModalCenter">Rate post</a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <img src="/pics/liudnas.png" width="30" height="30" alt="">
+                                    <img src="/pics/linksmas.png" width="30" height="30" alt="">
+                                    <img src="/pics/naglas.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo1.png" width="40" height="40" alt="">
+                                    <img src="/pics/emo4.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo5.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo6.png" width="30" height="30" alt="">
+                                    <img src="/pics/liudnas.png" width="30" height="30" alt="">
+                                    <img src="/pics/linksmas.png" width="30" height="30" alt="">
+                                    <img src="/pics/naglas.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo1.png" width="40" height="40" alt="">
+                                    <img src="/pics/emo2.png" width="40" height="30" alt="">
+                                    <img src="/pics/emo4.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo5.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo6.png" width="30" height="30" alt="">
+                                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                </div>
+                                <div class="modal-body">
+                                    Do you like this record?
+                                    <button type="button" class="close btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">Cancel</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <a th:href="@{/ratingPlus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
+                                    <a th:href="@{/ratingMinus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div th:each="record, iterStat: ${recordsList}" th:if="${iterStat.index} == 1">
+                    <p><img src="pics/linksmas.png"  width="80" height="80" alt="">
+                    <p id="postDate2">Posted: <span th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span></p>
+                    <p id="postTitle2"><span th:text="${record.recordTitle}"></span></p>
+                    <p id="postDescription2"><span th:text="${record.recordDescription}"></span></p>
+                    <a class="btn btn-sm btn-info"
+                       data-toggle="modal" data-target="#exampleModalCenter2">Rate post</a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <img src="/pics/liudnas.png" width="30" height="30" alt="">
+                                    <img src="/pics/linksmas.png" width="30" height="30" alt="">
+                                    <img src="/pics/naglas.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo1.png" width="40" height="40" alt="">
+                                    <img src="/pics/emo4.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo5.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo6.png" width="30" height="30" alt="">
+                                    <img src="/pics/liudnas.png" width="30" height="30" alt="">
+                                    <img src="/pics/linksmas.png" width="30" height="30" alt="">
+                                    <img src="/pics/naglas.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo1.png" width="40" height="40" alt="">
+                                    <img src="/pics/emo2.png" width="40" height="30" alt="">
+                                    <img src="/pics/emo4.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo5.png" width="30" height="30" alt="">
+                                    <img src="/pics/emo6.png" width="30" height="30" alt="">
+                                    <h5 class="modal-title" id="exampleModalLongTitle2"></h5>
+                                </div>
+                                <div class="modal-body">
+                                    Do you like this record?
+                                    <button type="button" class="close btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">Cancel</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <a th:href="@{/ratingPlus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
+                                    <a th:href="@{/ratingMinus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
 
-        <!--        </nav>-->
+<!--                <table style="width: 60%; margin-left:20%; margin-top: 10%; margin-bottom: 10%; border: 10px">-->
+<!--                    <tbody>-->
+<!--                    <tr id="postDate">-->
+<!--                        <td th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></td>-->
+<!--                    </tr>-->
+<!--                    <tr id="postTitle">-->
+<!--                        <td th:text="${record.recordTitle}"></td>-->
+<!--                    </tr>-->
+<!--                    <tr id="postDescription">-->
+<!--                        <td th:text="${record.recordDescription}"></td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+            </div>
+
+            <div class="col-xs-2"></div>
+
+        </section>
+        <div style="text-align: center">
+            <a th:href="@{/allRecordPage}">
+                <button id="allrecbtn" class="btn btn-sm btn-primary"> See All Records </button>
+            </a>
+        </div>
     </section>
 </div>
 </body>

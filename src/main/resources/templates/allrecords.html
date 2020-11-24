@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="css/style.css" th:href="@{/css/style.css}"/>
+    <style>
+        tr:nth-child(even) {
+            background-color: #132854;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<nav>
+    <h1>Audriaus blog'as</h1>
+    <div class="drawline"></div>
+</nav>
+<br>
+<section>
+    <div class="col-xs-12">
+        <a th:href="@{/}"><button id="backbutton" class="btn btn-sm btn-warning"> Back</button></a>
+    <form class="form-inline">
+        <img src="/pics/search.png" width="20" height="20" alt="">
+        <input class="form-control" id="myInput" style="width: 100%;" type="text"
+               placeholder="Start type to search record...">
+    </form>
+    </div>
+</section>
+<section class="row">
+
+    <!--            <div class="col-xs-1"></div>-->
+    <div class="col-xs-12">
+        <div class="container-fluid">
+            <table id="myTable" class="table-bordered" style="width: 100%; margin-top: 1%;">
+                <thead>
+                <tr class="center" style="background-color: #132854; color: white;">
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Posted</th>
+                    <th>Rate post</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr th:each="record:${recordsList}">
+                    <td style="width: 20%" th:text="${record.recordTitle}"></td>
+                    <td style="width: 70%" th:text="${record.recordDescription}"></td>
+                    <td style="width: 10%" th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></td>
+                    <td><a class="btn btn-sm btn-block btn-info"
+                           data-toggle="modal" data-target="#exampleModalCenter">Rate post</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <img src="/pics/liudnas.png" width="30" height="30" alt="">
+                                        <img src="/pics/linksmas.png" width="30" height="30" alt="">
+                                        <img src="/pics/naglas.png" width="30" height="30" alt="">
+                                        <img src="/pics/emo1.png" width="40" height="40" alt="">
+                                        <img src="/pics/emo4.png" width="30" height="30" alt="">
+                                        <img src="/pics/emo5.png" width="30" height="30" alt="">
+                                        <img src="/pics/emo6.png" width="30" height="30" alt="">
+                                        <img src="/pics/liudnas.png" width="30" height="30" alt="">
+                                        <img src="/pics/linksmas.png" width="30" height="30" alt="">
+                                        <img src="/pics/naglas.png" width="30" height="30" alt="">
+                                        <img src="/pics/emo1.png" width="40" height="40" alt="">
+                                        <img src="/pics/emo2.png" width="40" height="30" alt="">
+                                        <img src="/pics/emo4.png" width="30" height="30" alt="">
+                                        <img src="/pics/emo5.png" width="30" height="30" alt="">
+                                        <img src="/pics/emo6.png" width="30" height="30" alt="">
+                                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        Do you like this record?
+                                        <button type="button" class="close btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">Cancel</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a th:href="@{/ratingPlus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
+                                        <a th:href="@{/ratingMinus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--            <div class="col-xs-8">-->
+
+    <!--                <table id="myTable" class="table-bordered" style="width: 60%; margin-left:20%; margin-top: 10%; margin-bottom: 10%; border: 10px">-->
+    <!--                    <tbody>-->
+    <!--                    <tr id="postDate">-->
+    <!--                        <td th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></td>-->
+    <!--                    </tr>-->
+    <!--                    <tr id="postTitle">-->
+    <!--                        <td th:text="${record.recordTitle}"></td>-->
+    <!--                    </tr>-->
+    <!--                    <tr id="postDescription">-->
+    <!--                        <td th:text="${record.recordDescription}"></td>-->
+    <!--                    </tr>-->
+    <!--                    </tbody>-->
+    <!--                </table>-->
+    <!--            </div>-->
+
+    <!--            <div class="col-xs-1"></div>-->
+
+</section>
+</section>
+</div>
+<script src="js/searchscript.js"></script>
+</body>
+</html>

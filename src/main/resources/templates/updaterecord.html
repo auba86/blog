@@ -9,11 +9,12 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" media="all"
-          href="style.css" th:href="@{/style.css}"/>
+          href="css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
     <h1>Update Record</h1>
-    <a th:href="@{/}"><button id="backbutton" class="btn btn-sm btn-info"> Back </button></a>
+    <div class="drawline"></div>
+    <a th:href="@{/}"><button id="backbutton" class="btn btn-sm btn-warning"> Back</button></a>
     <section class="row" style="width: 60%; margin-left:20%; margin-top: 1%; border: 10px">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">
@@ -28,7 +29,6 @@
         <input type="text" th:field="*{recordTitle}">
         </div>
         <br>
-<!--        <input type="text" th:field="*{recordDescription}">-->
         <div>
         <textarea name="textarea" rows="5" cols="50" maxlength="300"
                   type="text" th:field="*{recordDescription}"></textarea>

@@ -30,6 +30,10 @@ public class Record {
     @JsonBackReference
     private User user;
 
+    @OneToOne
+    @JoinColumn(name = "ratingId")
+    private Rating rating;
+
     public String getRecordTitle() {
         return recordTitle;
     }
@@ -76,5 +80,13 @@ public class Record {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 }
