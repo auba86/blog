@@ -11,6 +11,10 @@ public class Rating {
 
     private Integer ratingValue;
 
+    private Integer likeValue;
+
+    private Integer dislikeValue;
+
     @OneToOne(mappedBy = "rating", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Record record;
@@ -37,5 +41,21 @@ public class Rating {
 
     public void setRecord(Record record) {
         this.record = record;
+    }
+
+    public Integer getLikeValue() {
+        return likeValue;
+    }
+
+    public void setLikeValue(Integer likeValue) {
+        this.likeValue = likeValue;
+    }
+
+    public Integer getDislikeValue() {
+        return dislikeValue;
+    }
+
+    public void setDislikeValue(Integer dislikeValue) {
+        this.dislikeValue = dislikeValue;
     }
 }

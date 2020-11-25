@@ -6,6 +6,7 @@ import blog.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,9 @@ public class RatingService {
 
     public void deleteRatingById(long ratingId) {
         this.ratingRepository.deleteById(ratingId);
+    }
+
+    public List<Rating> getAllRatings() {
+        return (List<Rating>) ratingRepository.findAll();
     }
 }

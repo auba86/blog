@@ -53,8 +53,13 @@
                     <p id="postDate">Posted: <span th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span></p>
                     <p id="postTitle"><span th:text="${record.recordTitle}"></span></p>
                     <p id="postDescription"><span th:text="${record.recordDescription}"></span></p>
-                    <a class="btn btn-sm btn-info"
-                       data-toggle="modal" data-target="#exampleModalCenter">Rate post</a>
+                    <p style="color: #f1f1f1"><a class="btn btn-sm btn-info"
+                       data-toggle="modal" data-target="#exampleModalCenter">Rate post</a><span>
+                        <img src="/pics/thumbup.png" width="30" height="30" alt="">
+                        <td th:text="${record.rating.likeValue}"></td>
+                        <img src="/pics/thumbdown.png" width="30" height="30" alt="">
+                        <td th:text="${record.rating.dislikeValue}"></td>
+                     </span></p>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -84,8 +89,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-footer">
-                                    <a th:href="@{/ratingPlus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
-                                    <a th:href="@{/ratingMinus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
+                                    <a th:href="@{/ratingPlus2/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
+                                    <a th:href="@{/ratingMinus2/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
                                 </div>
                             </div>
                         </div>
@@ -97,8 +102,14 @@
                     <p id="postDate2">Posted: <span th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span></p>
                     <p id="postTitle2"><span th:text="${record.recordTitle}"></span></p>
                     <p id="postDescription2"><span th:text="${record.recordDescription}"></span></p>
-                    <a class="btn btn-sm btn-info"
-                       data-toggle="modal" data-target="#exampleModalCenter2">Rate post</a>
+
+                    <p style="color: #f1f1f1"><a class="btn btn-sm btn-info"
+                                                 data-toggle="modal" data-target="#exampleModalCenter2">Rate post</a><span>
+                        <img src="/pics/thumbup.png" width="30" height="30" alt="">
+                        <td th:text="${record.rating.likeValue}"></td>
+                        <img src="/pics/thumbdown.png" width="30" height="30" alt="">
+                        <td th:text="${record.rating.dislikeValue}"></td>
+                     </span></p>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -128,28 +139,14 @@
                                     </button>
                                 </div>
                                 <div class="modal-footer">
-                                    <a th:href="@{/ratingPlus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
-                                    <a th:href="@{/ratingMinus/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
+                                    <a th:href="@{/ratingPlus2/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
+                                    <a th:href="@{/ratingMinus2/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr>
-
-<!--                <table style="width: 60%; margin-left:20%; margin-top: 10%; margin-bottom: 10%; border: 10px">-->
-<!--                    <tbody>-->
-<!--                    <tr id="postDate">-->
-<!--                        <td th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></td>-->
-<!--                    </tr>-->
-<!--                    <tr id="postTitle">-->
-<!--                        <td th:text="${record.recordTitle}"></td>-->
-<!--                    </tr>-->
-<!--                    <tr id="postDescription">-->
-<!--                        <td th:text="${record.recordDescription}"></td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
             </div>
 
             <div class="col-xs-2"></div>

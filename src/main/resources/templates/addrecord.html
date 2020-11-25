@@ -27,7 +27,7 @@
               method="POST">
             <div>
                 <input type="text" th:field="*{recordTitle}"
-                       placeholder="Record Title">
+                       placeholder="Record Title" required>
             </div>
             <br>
             <div class="box">
@@ -35,7 +35,7 @@
                     <span id="counter-display" class="tag is-success">0</span></label>
                 <br>
                 <textarea name="textarea" id="counter-input" rows="5" cols="50" maxlength="300"
-                          type="text" th:field="*{recordDescription}" placeholder="Record"></textarea>
+                          type="text" th:field="*{recordDescription}" placeholder="Record" required></textarea>
             </div>
 
             <button type="submit" class="btn btn-sm btn-primary"> Save</button>

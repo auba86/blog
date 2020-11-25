@@ -45,6 +45,8 @@ public class RecordController {
 
         Rating rating = new Rating();
         rating.setRatingValue(0);
+        rating.setLikeValue(0);
+        rating.setDislikeValue(0);
         ratingService.saveRating(rating);
         record.setRating(rating);
 
@@ -59,6 +61,17 @@ public class RecordController {
         Record record = recordService.getRecordById(recordId);
         Rating rating = ratingService.getRatingById(record.getRating().getRatingId());
         rating.setRatingValue(rating.getRatingValue() + 1);
+        rating.setLikeValue(rating.getLikeValue() + 1);
+        this.ratingService.saveRating(rating);
+        return "redirect:/allRecordPage";
+    }
+
+    @GetMapping("/ratingPlus2/{recordId}")
+    public String ratingPlus2(@PathVariable(value = "recordId") long recordId) {
+        Record record = recordService.getRecordById(recordId);
+        Rating rating = ratingService.getRatingById(record.getRating().getRatingId());
+        rating.setRatingValue(rating.getRatingValue() + 1);
+        rating.setLikeValue(rating.getLikeValue() + 1);
         this.ratingService.saveRating(rating);
         return "redirect:/";
     }
@@ -68,6 +81,17 @@ public class RecordController {
         Record record = recordService.getRecordById(recordId);
         Rating rating = ratingService.getRatingById(record.getRating().getRatingId());
         rating.setRatingValue(rating.getRatingValue() - 1);
+        rating.setDislikeValue(rating.getDislikeValue() + 1);
+        this.ratingService.saveRating(rating);
+        return "redirect:/allRecordPage";
+    }
+
+    @GetMapping("/ratingMinus2/{recordId}")
+    public String ratingMinus2(@PathVariable(value = "recordId") long recordId) {
+        Record record = recordService.getRecordById(recordId);
+        Rating rating = ratingService.getRatingById(record.getRating().getRatingId());
+        rating.setRatingValue(rating.getRatingValue() - 1);
+        rating.setDislikeValue(rating.getDislikeValue() + 1);
         this.ratingService.saveRating(rating);
         return "redirect:/";
     }
@@ -92,8 +116,9 @@ public class RecordController {
     @GetMapping("/manageRecords")
     public String manageRecords(Model model){
         List<Record> recordsList = recordService.getAllRecords();
+        Collections.sort(recordsList, new CustomComparator());
         model.addAttribute("recordsList", recordsList);
-        return "managerecords";
+        return "manageRecords";
     }
 
     @GetMapping("/deleteRecord/{recordId}")
@@ -101,7 +126,7 @@ public class RecordController {
         Record record = recordService.getRecordById(recordId);
         this.recordService.deleteRecordById(recordId);
         this.ratingService.deleteRatingById(record.getRating().getRatingId());
-        return "redirect:/";
+        return "redirect:/manageRecords";
     }
 
     @GetMapping("/recordUpdateForm/{recordId}")
@@ -117,11 +142,71 @@ public class RecordController {
         return "redirect:/";
     }
 
+//   --- Data sort section ---
+
+    @GetMapping("/sortNewToOld")
+    public String sortNewToOld(Model model) {
+        List<Record> recordsList = recordService.getAllRecords();
+        Collections.sort(recordsList, new CustomComparator());
+        model.addAttribute("recordsList", recordsList);
+        return "allrecords";
+    }
+
+    @GetMapping("/sortOldToNew")
+    public String sortOldToNew(Model model) {
+        List<Record> recordsList = recordService.getAllRecords();
+        Collections.sort(recordsList, new CustomComparatorOldNew());
+        model.addAttribute("recordsList", recordsList);
+        return "allrecords";
+    }
+
+    @GetMapping("/sortBestRatingFirst")
+    public String sortBestRatingFirst(Model model) {
+        List<Record> recordsList = recordService.getAllRecords();
+        Collections.sort(recordsList, new CustomComparatorBest());
+        model.addAttribute("recordsList", recordsList);
+        return "allrecords";
+    }
+
+    @GetMapping("/sortWorstRatingFirst")
+    public String sortWorstRatingFirst(Model model) {
+        List<Record> recordsList = recordService.getAllRecords();
+        Collections.sort(recordsList, new CustomComparatorWorst());
+        model.addAttribute("recordsList", recordsList);
+        return "allrecords";
+    }
+
+
+
     public class CustomComparator implements Comparator<Record>
     {
         @Override
         public int compare(Record o1, Record o2) {
             return o2.getRecordId().compareTo(o1.getRecordId());
+        }
+    }
+
+    public class CustomComparatorOldNew implements Comparator<Record>
+    {
+        @Override
+        public int compare(Record o1, Record o2) {
+            return o1.getRecordId().compareTo(o2.getRecordId());
+        }
+    }
+
+    public class CustomComparatorBest implements Comparator<Record>
+    {
+        @Override
+        public int compare(Record o1, Record o2) {
+            return o2.getRating().getRatingValue().compareTo(o1.getRating().getRatingValue());
+        }
+    }
+
+    public class CustomComparatorWorst implements Comparator<Record>
+    {
+        @Override
+        public int compare(Record o1, Record o2) {
+            return o1.getRating().getRatingValue().compareTo(o2.getRating().getRatingValue());
         }
     }
 
