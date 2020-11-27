@@ -61,7 +61,11 @@ tr {
 
 body {
     background-image: url("../pics/web.png");
-    background-repeat: repeat-x;
+    background-repeat: repeat-y;
+}
+
+input{
+    background-color: beige;
 }
 
 * {box-sizing: border-box;}
