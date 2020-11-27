@@ -21,7 +21,7 @@
 </head>
 <body>
 <nav>
-    <h1>Audriaus blog'as</h1>
+    <h1>All Records</h1>
     <div class="drawline"></div>
 </nav>
 <br>
@@ -77,8 +77,8 @@
                 <tr>
                     <td style="width: 20%" th:text="${record.recordTitle}"></td>
                     <td style="width: 46%" th:text="${record.recordDescription}"></td>
-                    <td style="width: 8%" th:text="${record.rating.likeValue}"></td>
-                    <td style="width: 8%" th:text="${record.rating.dislikeValue}"></td>
+                    <td style="width: 8%; text-align: center" th:text="${record.rating.likeValue}"></td>
+                    <td style="width: 8%; text-align: center" th:text="${record.rating.dislikeValue}"></td>
                     <td style="width: 10%"
                         th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></td>
                     <td>
