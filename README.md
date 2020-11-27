@@ -16,6 +16,7 @@ My Blog admin could create, update, delete records. Also admin could see feedbac
 *JavaScript
 *Bootstrap
 *CSS
+*Thymeleaf
 
 --- Functionality ---
 
