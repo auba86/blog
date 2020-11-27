@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="css/style.css" th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+<nav>
+    <h1>Admin Manager System</h1>
+    <div class="drawline"></div>
+</nav>
+<div class="container">
+
+    <section class="row">
+        <p style="margin-top: 20px; color: #f1f1f1; font-weight: bold">Admin menu</p>
+        <nav role="navigation">
+            <div id="menuToggle">
+                <input type="checkbox"/>
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a th:href="@{/createNewUser}">
+                        <li>Create User</li>
+                    </a>
+                    <a th:href="@{/newRecordForm}">
+                        <li>Add Record</li>
+                    </a>
+                    <a th:href="@{/manageRecords}">
+                        <li>Manage Records</li>
+                    </a>
+                    <a th:href="@{/getFeedback}">
+                        <li>See Feedback</li>
+                    </a>
+                    <a th:href="@{/}">
+                        <li>Logout</li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="css/style.css" th:href="@{/css/style.css}"/>
+    <style>
+        tr:nth-child(even) {
+            background-color: #132854;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<nav>
+    <h1>Feedbacks List</h1>
+    <div class="drawline"></div>
+</nav>
+<br>
+<section>
+    <div class="col-xs-10">
+
+        <a th:href="@{/managerPage}">
+            <button id="backbutton" class="btn btn-sm btn-warning custom"> Manager system</button>
+        </a>
+        <form class="form-inline">
+            <img src="/pics/search.png" style="margin-top: 10px" width="20" height="20" alt="">
+            <input class="form-control" id="myInput" style="width: 95%;" type="text"
+                   placeholder="Search for feedback...">
+        </form>
+    </div>
+    <div class="col-xs-2"></div>
+</section>
+<section class="row">
+    <div class="col-xs-10">
+        <div class="container-fluid">
+            <table id="myTable" class="table-bordered" style="width: 100%; margin-top: 1%;"
+                   th:each="feedback:${feedbackList}">
+                <thead>
+                <tr class="center" style="background-color: #132854; color: white;">
+                    <th>Name</th>
+                    <th>Phone number</th>
+                    <th>Email</th>
+                    <th>Feedback Message</th>
+                    <th>Action</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="width: 10%" th:text="${feedback.fbName}"></td>
+                    <td style="width: 10%" th:text="${feedback.fbPhoneNumber}"></td>
+                    <td style="width: 20%" th:text="${feedback.fbEmail}"></td>
+                    <td style="width: 50%" th:text="${feedback.fbDescription}"></td>
+                    <td style="width: 10%">
+                        <a th:href="@{/deleteFeedback/{fbId}(fbId=${feedback.fbId})}"
+                           class="btn btn-sm btn-block btn-danger">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-2"></div>
+</section>
+<script src="js/searchscript.js"></script>
+</body>
+</html>

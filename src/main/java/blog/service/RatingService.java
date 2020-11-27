@@ -1,7 +1,6 @@
 package blog.service;
 
 import blog.model.Rating;
-import blog.model.Record;
 import blog.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

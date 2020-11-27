@@ -27,17 +27,17 @@
                 <span></span>
                 <span></span>
                 <ul id="menu">
-                    <a th:href="@{/createNewUser}">
-                        <li>Create User</li>
+                    <a th:href="@{/allRecordPage}">
+                        <li>All Posts</li>
                     </a>
-                    <a th:href="@{/newRecordForm}">
-                        <li>Add Record</li>
+                    <a th:href="@{/top5page}">
+                        <li>TOP 5</li>
                     </a>
-                    <a th:href="@{/manageRecords}">
-                        <li>Manage Records</li>
+                    <a th:href="@{/feedback}">
+                        <li>Feedback</li>
                     </a>
-                    <a th:href="@{/testPage}">
-                        <li>About project</li>
+                    <a th:href="@{/admin}">
+                        <li>Admin</li>
                     </a>
                 </ul>
             </div>
@@ -49,19 +49,23 @@
             <div class="col-xs-8">
 
                 <div th:each="record, iterStat: ${recordsList}" th:if="${iterStat.index} == 0">
-                    <img src="pics/naglas.png"  width="80" height="80" alt="">
-                    <p id="postDate">Posted: <span th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span></p>
+                    <img src="pics/naglas.png" width="80" height="80" alt="">
+                    <p id="postDate">Posted: <span
+                            th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span>
+                    </p>
                     <p id="postTitle"><span th:text="${record.recordTitle}"></span></p>
                     <p id="postDescription"><span th:text="${record.recordDescription}"></span></p>
                     <p style="color: #f1f1f1"><a class="btn btn-sm btn-info"
-                       data-toggle="modal" data-target="#exampleModalCenter">Rate post</a><span>
+                                                 data-toggle="modal" data-target="#exampleModalCenter">Rate
+                        post</a><span>
                         <img src="/pics/thumbup.png" width="30" height="30" alt="">
                         <td th:text="${record.rating.likeValue}"></td>
                         <img src="/pics/thumbdown.png" width="30" height="30" alt="">
                         <td th:text="${record.rating.dislikeValue}"></td>
                      </span></p>
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -84,13 +88,16 @@
                                 </div>
                                 <div class="modal-body">
                                     Do you like this record?
-                                    <button type="button" class="close btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close btn btn-sm btn-danger" data-dismiss="modal"
+                                            aria-label="Close">
                                         <span aria-hidden="true">Cancel</span>
                                     </button>
                                 </div>
                                 <div class="modal-footer">
-                                    <a th:href="@{/ratingPlus2/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
-                                    <a th:href="@{/ratingMinus2/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
+                                    <a th:href="@{/ratingPlus2/{recordId}(recordId=${record.recordId})}"
+                                       class="btn btn-block btn-primary">Like</a>
+                                    <a th:href="@{/ratingMinus2/{recordId}(recordId=${record.recordId})}"
+                                       class="btn btn-block btn-danger">Dislike</a>
                                 </div>
                             </div>
                         </div>
@@ -98,20 +105,24 @@
                 </div>
                 <hr>
                 <div th:each="record, iterStat: ${recordsList}" th:if="${iterStat.index} == 1">
-                    <p><img src="pics/linksmas.png"  width="80" height="80" alt="">
-                    <p id="postDate2">Posted: <span th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span></p>
+                    <p><img src="pics/linksmas.png" width="80" height="80" alt="">
+                    <p id="postDate2">Posted: <span
+                            th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span>
+                    </p>
                     <p id="postTitle2"><span th:text="${record.recordTitle}"></span></p>
                     <p id="postDescription2"><span th:text="${record.recordDescription}"></span></p>
 
                     <p style="color: #f1f1f1"><a class="btn btn-sm btn-info"
-                                                 data-toggle="modal" data-target="#exampleModalCenter2">Rate post</a><span>
+                                                 data-toggle="modal" data-target="#exampleModalCenter2">Rate
+                        post</a><span>
                         <img src="/pics/thumbup.png" width="30" height="30" alt="">
                         <td th:text="${record.rating.likeValue}"></td>
                         <img src="/pics/thumbdown.png" width="30" height="30" alt="">
                         <td th:text="${record.rating.dislikeValue}"></td>
                      </span></p>
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -134,13 +145,16 @@
                                 </div>
                                 <div class="modal-body">
                                     Do you like this record?
-                                    <button type="button" class="close btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close btn btn-sm btn-danger" data-dismiss="modal"
+                                            aria-label="Close">
                                         <span aria-hidden="true">Cancel</span>
                                     </button>
                                 </div>
                                 <div class="modal-footer">
-                                    <a th:href="@{/ratingPlus2/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-primary">Like</a>
-                                    <a th:href="@{/ratingMinus2/{recordId}(recordId=${record.recordId})}" class="btn btn-block btn-danger">Dislike</a>
+                                    <a th:href="@{/ratingPlus2/{recordId}(recordId=${record.recordId})}"
+                                       class="btn btn-block btn-primary">Like</a>
+                                    <a th:href="@{/ratingMinus2/{recordId}(recordId=${record.recordId})}"
+                                       class="btn btn-block btn-danger">Dislike</a>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +168,7 @@
         </section>
         <div style="text-align: center">
             <a th:href="@{/allRecordPage}">
-                <button id="allrecbtn" class="btn btn-sm btn-primary"> See All Records </button>
+                <button id="allrecbtn" class="btn btn-sm btn-primary"> See All Records</button>
             </a>
         </div>
     </section>

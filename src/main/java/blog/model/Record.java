@@ -3,11 +3,7 @@ package blog.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
-import java.util.Date;
 
 @Entity
 public class Record {
@@ -26,7 +22,7 @@ public class Record {
     private Long userId;
 
     @ManyToOne
-    @JoinColumn(name="userId", nullable=false)
+    @JoinColumn(name = "userId", nullable = false)
     @JsonBackReference
     private User user;
 

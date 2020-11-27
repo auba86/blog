@@ -14,7 +14,9 @@
 </head>
 <body>
 <h1>Create new user</h1>
-<a th:href="@{/}"><button id="backbutton" class="btn btn-sm btn-warning"> Back</button></a>
+<a th:href="@{/managerPage}">
+    <button id="backbutton" class="btn btn-sm btn-warning custom"> Manager system</button>
+</a>
 <section class="row" id="centeredElement" style="width: 50%; margin-left:30%; border: 10px">
 
     <div class="col-xs-2"></div>
@@ -31,7 +33,7 @@
                 <input type="password" th:field="*{password}"
                        placeholder="Your Password" required>
             </div>
-            <button type="submit" class="btn btn-sm btn-primary"> Save </button>
+            <button type="submit" class="btn btn-sm btn-primary"> Save</button>
         </form>
     </div>
 

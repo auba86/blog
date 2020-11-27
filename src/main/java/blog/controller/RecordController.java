@@ -5,13 +5,11 @@ import blog.model.Record;
 import blog.model.User;
 import blog.service.RatingService;
 import blog.service.RecordService;
-import org.hibernate.query.criteria.internal.expression.function.CurrentDateFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
 
@@ -32,13 +30,26 @@ public class RecordController {
         return "addrecord";
     }
 
-    @GetMapping("/testPage")
+    @GetMapping("/admin")
     public String testPage() {
-        return "test";
+        return "adminlogin";
+    }
+
+    @RequestMapping(value = "/adminLoginForm")
+    public String loginData(@RequestParam("username") String username, @RequestParam("password") String password) {
+
+        if (username.equals("audrius") && password.equals("as")) {
+            return "adminmanagersystem";
+        } else return "badloginpage";
+    }
+
+    @GetMapping("/managerPage")
+    public String managerPage() {
+        return "adminmanagersystem";
     }
 
     @PostMapping("/saveNewRecord")
-    public String saveNewRecord(@ModelAttribute(value="record") Record record){
+    public String saveNewRecord(@ModelAttribute(value = "record") Record record) {
         User user = new User();
         user.setUserId(1L);
         record.setUser(user);
@@ -53,7 +64,7 @@ public class RecordController {
         record.setRecordDate(LocalDateTime.now());
 
         recordService.saveNewRecord(record);
-        return "redirect:/";
+        return "adminmanagersystem";
     }
 
     @GetMapping("/ratingPlus/{recordId}")
@@ -99,7 +110,6 @@ public class RecordController {
     @GetMapping("/")
     public String viewFirstTwoRecords(Model model) {
         List<Record> recordsList = recordService.getAllRecords();
-        //Collections.sort(recordsList, (left, right) -> (int) (left.getRecordId() - right.getRecordId()));
         Collections.sort(recordsList, new CustomComparator());
         model.addAttribute("recordsList", recordsList);
         return "index";
@@ -113,8 +123,17 @@ public class RecordController {
         return "allrecords";
     }
 
+    @GetMapping("/top5page")
+    public String top5page(Model model) {
+        List<Record> recordsList = recordService.getAllRecords();
+        Collections.sort(recordsList, new CustomComparatorBest());
+        model.addAttribute("recordsList", recordsList);
+        return "top5pageview";
+    }
+
+
     @GetMapping("/manageRecords")
-    public String manageRecords(Model model){
+    public String manageRecords(Model model) {
         List<Record> recordsList = recordService.getAllRecords();
         Collections.sort(recordsList, new CustomComparator());
         model.addAttribute("recordsList", recordsList);
@@ -130,16 +149,16 @@ public class RecordController {
     }
 
     @GetMapping("/recordUpdateForm/{recordId}")
-    public String recordUpdateForm(@PathVariable(value = "recordId") long recordId, Model model){
+    public String recordUpdateForm(@PathVariable(value = "recordId") long recordId, Model model) {
         Record record = recordService.getRecordById(recordId);
         model.addAttribute("record", record);
         return "updaterecord";
     }
 
     @PostMapping("/updateOldRecord")
-    public String updateOldRecord(@ModelAttribute("record") Record postRecord){
+    public String updateOldRecord(@ModelAttribute("record") Record postRecord) {
         recordService.updateRecord(postRecord);
-        return "redirect:/";
+        return "adminmanagersystem";
     }
 
 //   --- Data sort section ---
@@ -176,38 +195,31 @@ public class RecordController {
         return "allrecords";
     }
 
-
-
-    public class CustomComparator implements Comparator<Record>
-    {
+    public class CustomComparator implements Comparator<Record> {
         @Override
         public int compare(Record o1, Record o2) {
             return o2.getRecordId().compareTo(o1.getRecordId());
         }
     }
 
-    public class CustomComparatorOldNew implements Comparator<Record>
-    {
+    public class CustomComparatorOldNew implements Comparator<Record> {
         @Override
         public int compare(Record o1, Record o2) {
             return o1.getRecordId().compareTo(o2.getRecordId());
         }
     }
 
-    public class CustomComparatorBest implements Comparator<Record>
-    {
+    public class CustomComparatorBest implements Comparator<Record> {
         @Override
         public int compare(Record o1, Record o2) {
             return o2.getRating().getRatingValue().compareTo(o1.getRating().getRatingValue());
         }
     }
 
-    public class CustomComparatorWorst implements Comparator<Record>
-    {
+    public class CustomComparatorWorst implements Comparator<Record> {
         @Override
         public int compare(Record o1, Record o2) {
             return o1.getRating().getRatingValue().compareTo(o2.getRating().getRatingValue());
         }
     }
-
 }

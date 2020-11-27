@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Feedback</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="css/style.css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Your Feedback</h1>
+<div class="drawline"></div>
+<a th:href="@{/}">
+    <button id="backbutton" class="btn btn-sm btn-warning custom2"> Back</button>
+</a>
+<section class="row" style="width: 60%; margin-left:20%; margin-top: 5%; border: 10px">
+
+    <div class="col-xs-2"></div>
+
+    <div class="col-xs-8">
+        <form action="#" th:action="@{/saveFeedback}" th:object="${feedback}"
+              method="POST">
+            <div>
+                <input size="27" type="text" th:field="*{fbName}"
+                       placeholder="Your name (required)" required>
+            </div>
+            <br>
+            <div>
+                <input size="27" type="text" th:field="*{fbPhoneNumber}"
+                       placeholder="Your phone number (not required)">
+            </div>
+            <br>
+            <div>
+                <input size="27" type="text" th:field="*{fbEmail}"
+                       placeholder="Your email (required)" required>
+            </div>
+            <br>
+            <div class="box">
+                <label for="counter-input" class="label">Characters (MAX 600):
+                    <span id="counter-display" class="tag is-success">0</span></label>
+                <br>
+                <textarea name="textarea" id="counter-input" rows="5" cols="50" maxlength="600"
+                          type="text" th:field="*{fbDescription}" placeholder="Your message (required)" required></textarea>
+            </div>
+
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"> Save</button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img src="/pics/sent.png" width="100" height="100" alt="">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="color: red">Back to the form</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <span><h5 class="modal-title" id="exampleModalLabel">Sending your message...</h5></span>
+                        </div>
+                        <div class="modal-footer center">
+                            <button type="submit" class="btn btn-primary btn-block">Press to continue!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-xs-2"></div>
+
+</section>
+<script src="js/script.js"></script>
+</body>
+</html>

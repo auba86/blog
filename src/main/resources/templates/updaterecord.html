@@ -12,36 +12,38 @@
           href="css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-    <h1>Update Record</h1>
-    <div class="drawline"></div>
-    <a th:href="@{/}"><button id="backbutton" class="btn btn-sm btn-warning"> Back</button></a>
-    <section class="row" style="width: 60%; margin-left:20%; margin-top: 1%; border: 10px">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-8">
+<h1>Update Record</h1>
+<div class="drawline"></div>
+<a th:href="@{/}">
+    <button id="backbutton" class="btn btn-sm btn-warning"> Back</button>
+</a>
+<section class="row" style="width: 60%; margin-left:20%; margin-top: 1%; border: 10px">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
 
-    <form action="#" th:action="@{/updateOldRecord}" th:object="${record}"
-          method="POST">
+        <form action="#" th:action="@{/updateOldRecord}" th:object="${record}"
+              method="POST">
 
-        <input type="hidden" th:field="*{recordId}"/>
+            <input type="hidden" th:field="*{recordId}"/>
 
-        <div>
+            <div>
 
-        <input type="text" th:field="*{recordTitle}">
-        </div>
-        <br>
-        <div>
+                <input type="text" th:field="*{recordTitle}">
+            </div>
+            <br>
+            <div>
         <textarea name="textarea" rows="5" cols="50" maxlength="300"
                   type="text" th:field="*{recordDescription}"></textarea>
-        </div>
-        <br>
+            </div>
+            <br>
 
-        <button type="submit" class="btn btn-sm btn-primary"> Update </button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-sm btn-primary"> Update</button>
+        </form>
+    </div>
 
-        <div class="col-xs-2"></div>
+    <div class="col-xs-2"></div>
 
-    </section>
+</section>
 
 </body>
 </html>

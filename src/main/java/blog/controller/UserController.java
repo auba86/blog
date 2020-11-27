@@ -25,10 +25,8 @@ public class UserController {
     }
 
     @PostMapping("/saveUserData")
-    public String saveUserData(@ModelAttribute("user") User user){
+    public String saveUserData(@ModelAttribute("user") User user) {
         userService.saveUserData(user);
-        return "redirect:/";
+        return "adminmanagersystem";
     }
-
-
 }

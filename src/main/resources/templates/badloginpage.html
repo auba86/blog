@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Test page</title>
+    <title>Login Page</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -11,19 +11,24 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" media="all"
           href="css/style.css" th:href="@{/css/style.css}"/>
+
 </head>
 <body>
-<a th:href="@{/}"><button id="backbutton" class="btn btn-sm btn-warning"> Back</button></a>
+<nav class="center">
+    <img src="/pics/danger.png" width="60" height="60" alt=""><span><h1 style="color: red; font-weight: bold">BAD LOGIN DATA</h1></span>
+</nav>
 <div class="container">
+
     <section class="row">
-        <article class="col-xs-12">
-            <h2>Welcome to my first HTML website</h2>
-        </article>
-        <section class="row">
-            <div class="col-xs-4"><img src="pics/web.png"  width="100" height="100"> </div>
-            <div class="col-xs-4"> <img src="pics/web2.png"  width="100" height="100"> </div>
-            <div class="col-xs-4"> <img src="pics/web3.png"  width="100" height="100"> </div>
-        </section>
+        <div class="col-xs-2"></div>
+
+        <div class="col-xs-8 center" style="margin-top: 50px">
+            <a th:href="@{/}" class="btn btn-primary custom">Back to main page</a>
+            <a th:href="@{/admin}" class="btn btn-danger custom">Try again</a>
+        </div>
+
+        <div class="col-xs-2"></div>
+
     </section>
 </div>
 </body>

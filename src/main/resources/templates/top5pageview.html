@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TOP 5</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="css/style.css" th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+<nav>
+    <h1>TOP 5 records</h1>
+    <div class="drawline"></div>
+</nav>
+<section class="row">
+    <div class="col-xs-2">
+        <a th:href="@{/}">
+            <button id="backbutton" class="btn btn-sm btn-warning custom2"> Back</button>
+        </a>
+    </div>
+
+    <div class="col-xs-8" style="margin-top: 10px">
+
+        <div th:each="record, iterStat: ${recordsList}" th:if="${iterStat.index} <= 4">
+            <img src="pics/naglas.png" width="40" height="40" alt="">
+            <p id="postDate">Posted: <span
+                    th:text="${record.recordDate} ? ${#temporals.format(record.recordDate, 'yyyy.MM.dd, HH:mm')}"></span>
+            </p>
+            <p id="postTitle"><span th:text="${record.recordTitle}"></span></p>
+            <p id="postDescription"><span th:text="${record.recordDescription}"></span></p>
+            <p style="color: #f1f1f1">
+                <span>
+                        <img src="/pics/thumbup.png" width="30" height="30" alt="">
+                        <td th:text="${record.rating.likeValue}"></td>
+                        <img src="/pics/thumbdown.png" width="30" height="30" alt="">
+                        <td th:text="${record.rating.dislikeValue}"></td>
+                     </span></p>
+
+        </div>
+    </div>
+    <div class="col-xs-2"></div>
+</section>
+
+<hr>
+</body>
+</html>
